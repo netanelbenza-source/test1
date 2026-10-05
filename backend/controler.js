@@ -34,3 +34,11 @@ export async function deletewarning(id){
 }
 
 
+
+export async function updateWarning(id,body){
+    const result = await baseCrud().UpdateWarning(id,body)
+    return result
+
+}
+
+

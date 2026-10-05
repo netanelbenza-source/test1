@@ -77,11 +77,13 @@ app.delete('/api/alerts/:id',async(req,res)=>{
 })
 
 
-app.put('/api/alerts/:id/',(req,res)=>{
+app.put('/api/alerts/:id',async(req,res)=>{
     try{
         const {id} = req.params.id
-        const upDate = 
-    
+        const body = req.body
+        const upDate = await updateWarning(id,body)
+        res.json({success:true,data:upDate})
+
     
 
     }catch(err){
