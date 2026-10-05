@@ -46,7 +46,8 @@ app.get('/api/alerts/:id',async(req,res)=>{
 
 app.post('/api/alerts',(checkInsert),async(req,res)=>{
     try{
-       
+        const body = req.body
+        const result = await appWarning
     
     
 
