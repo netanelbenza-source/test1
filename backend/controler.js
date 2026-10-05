@@ -21,6 +21,16 @@ export async function appWarning(body){
    checkstatus(status)
    checkpriority(priority)
    checkarena(arena)
-   
-   
+   const result = await baseCrud().insertWarning(body)
+   return result
 }
+
+
+
+export async function deletewarning(id){
+    const result = await baseCrud().deleteWarning(id)
+    return true
+
+}
+
+

@@ -2,7 +2,7 @@ import env from "dotenv/config";
 import express from "express";
 import cors from 'cors'
 import { checkInsert } from "./middlewere.js";
-import { AllWarning,oneWarning } from "./controler.js";
+import { AllWarning,oneWarning,appWarning } from "./controler.js";
 
 
 const PORT = process.env.PORT || 3000;
@@ -47,7 +47,9 @@ app.get('/api/alerts/:id',async(req,res)=>{
 app.post('/api/alerts',(checkInsert),async(req,res)=>{
     try{
         const body = req.body
-        const result = await appWarning
+        const result = await appWarning(body)
+        res.json({success:true,data:result})
+
     
     
 
@@ -61,8 +63,10 @@ app.post('/api/alerts',(checkInsert),async(req,res)=>{
 
 app.delete('/api/alerts/:id',(req,res)=>{
     try{
-    
-    
+    const {id} = req.params
+    const deleate = deletewarning()
+
+
 
     }catch(err){
         throw err
