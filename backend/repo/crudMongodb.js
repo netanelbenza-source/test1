@@ -5,7 +5,7 @@ const collaction = db.collection('Warning')
 
 
 
-function baseCrud(){
+export function baseCrud(){
 
     async function insertWarning(warning){
        const id = (await collaction.insertOne(warning)).insertedId
@@ -36,5 +36,7 @@ function baseCrud(){
         else{return false}
 
     }
+
+    return {insertWarning,getOneWarning,getAllWarning,UpdateWarning,deleteWarning}
 
 }
