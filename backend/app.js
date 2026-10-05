@@ -2,7 +2,7 @@ import env from "dotenv/config";
 import express from "express";
 import cors from 'cors'
 import { checkInsert } from "./middlewere.js";
-import { AllWarning,oneWarning,appWarning,deletewarning } from "./controler.js";
+import { AllWarning,oneWarning,postWarning,deletewarning,updateWarning } from "./controler.js";
 
 
 const PORT = process.env.PORT || 3000;
@@ -29,7 +29,7 @@ app.get('/api/alerts',async(req,res)=>{
 
 app.get('/api/alerts/:id',async(req,res)=>{
     try{
-        const {id} = req.params.id
+        const id = req.params.id
         const getOneWarning = await oneWarning(id)
         res.json({success:true,data:getOneWarning})
     
@@ -44,10 +44,10 @@ app.get('/api/alerts/:id',async(req,res)=>{
 
 
 
-app.post('/api/alerts',(checkInsert),async(req,res)=>{
+app.post('/api/alerts',checkInsert(),async(req,res)=>{
     try{
         const body = req.body
-        const result = await appWarning(body)
+        const result = await postWarning(body)
         res.json({success:true,data:result})
 
     
@@ -63,7 +63,7 @@ app.post('/api/alerts',(checkInsert),async(req,res)=>{
 
 app.delete('/api/alerts/:id',async(req,res)=>{
     try{
-    const {id} = req.params.id
+    const id = req.params.id
     const deleate = deletewarning(id)
     res.json({success:true})
 
@@ -79,7 +79,7 @@ app.delete('/api/alerts/:id',async(req,res)=>{
 
 app.put('/api/alerts/:id',async(req,res)=>{
     try{
-        const {id} = req.params.id
+        const id = req.params.id
         const body = req.body
         const upDate = await updateWarning(id,body)
         res.json({success:true,data:upDate})

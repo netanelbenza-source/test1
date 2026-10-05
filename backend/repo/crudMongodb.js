@@ -13,6 +13,7 @@ export function baseCrud(){
     }
 
     async function getOneWarning(id) {
+        console.log(id)
         const result = await collaction.findOne({_id:new ObjectId(id)})
         return result
         

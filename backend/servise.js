@@ -3,7 +3,7 @@
 
 export function checkpriority(priority){
       const list = ['Critical','High',' Medium','Low']
-      if(! list.includes(description)){
+      if(! list.includes(priority)){
         const err = new Error('bed priority')
         err.status = 400
         throw err
@@ -12,7 +12,7 @@ export function checkpriority(priority){
 }
 
 
-export function checkpriority(arena){
+export function checkarena(arena){
     const list = ['North', 'South', 'Center']
     if(! list.includes(arena)){
         const err = new Error('bed arena')

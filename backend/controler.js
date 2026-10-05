@@ -1,3 +1,4 @@
+import env from 'dotenv/config'
 import { baseCrud } from "./repo/crudMongodb.js";
 import { checkstatus,checkpriority,checkarena } from "./servise.js";
 
@@ -11,12 +12,13 @@ export async function AllWarning(){
 
 export async function oneWarning(id){
    const result = await baseCrud().getOneWarning(id)
+   console.log(result)
    return result
 }
 
 
 
-export async function appWarning(body){
+export async function postWarning(body){
    const {priority,arena,status} = body
    checkstatus(status)
    checkpriority(priority)
