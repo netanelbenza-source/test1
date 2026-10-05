@@ -10,6 +10,11 @@ const Home = () => {
   const [loding, setloding] = useState(true);
   const [err, seterr] = useState("");
   const [search,setsearch] = useState('')
+  const [update,setupdate] = useState('')
+  const [FieldofChange,setFieldofChange] = useState('')
+  const [change,setchange] = useState('')
+  const[filter,setfilter] = useState('')
+
 
 
   async function deletewarning(id:string){
@@ -18,6 +23,24 @@ const Home = () => {
         })
         if (! response.ok){
             seterr('המחיקה לא הושלמה')
+        }
+
+  }
+
+
+
+async function updatewarning(id:string){
+        const up = {[FieldofChange]:change}
+        const response = await fetch(`http://localhost:3000/api/alerts/${id}`,{
+            method:'PUT',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify(up)
+        })
+        if (! response.ok){
+            seterr('העידכון לא הושלם')
+        }
+        if(response.ok){
+            setfilter('ok')
         }
 
   }
@@ -83,6 +106,14 @@ const Home = () => {
                 <li>lon : {w.lon}</li>
             </ul>
             <button onClick={(e)=>deletewarning(String(w._id))}>delete</button>
+            <button onClick={(e)=> setupdate('ok')}>update</button>
+            {update && (
+                <div>
+                <input type="text" placeholder="בחר שדה לשנות" onChange={(e)=> setFieldofChange(e.target.value) } />
+                <input type="text" placeholder="שינוי" onChange={(e)=> setchange(e.target.value) } />
+                 <button onClick={(e)=> updatewarning(String(w._id))}>update</button>
+                </div>
+            )}
         </div>
       ))}
     </div>

@@ -6,13 +6,14 @@ import Form from './compneta/Form'
 import Onewarning from './compneta/Onewarning'
 import Search from './compneta/Search'
 
+
 function App() {
 
   return (
     <>
     <BrowserRouter>
     <Routes>
-    <Route path='/form' element={<Form/>}></Route> 
+    <Route path='/form' element={<Form/>}></Route>  
     <Route path='/search' element={<Search/>}></Route> 
     <Route path='/oneWarning' element={<Onewarning/>}></Route> 
     <Route path='/' element={<Layout/>}>
