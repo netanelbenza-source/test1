@@ -4,6 +4,7 @@ import Layout from './compneta/Layout'
 import Home from './compneta/home'
 import Form from './compneta/Form'
 import Onewarning from './compneta/Onewarning'
+import Search from './compneta/Search'
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
     <BrowserRouter>
     <Routes>
     <Route path='/form' element={<Form/>}></Route> 
+    <Route path='/search' element={<Search/>}></Route> 
     <Route path='/oneWarning' element={<Onewarning/>}></Route> 
     <Route path='/' element={<Layout/>}>
     <Route path='/home' element={<Home/>}></Route>

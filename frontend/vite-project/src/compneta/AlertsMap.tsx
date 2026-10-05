@@ -14,6 +14,12 @@ export interface MapAlert {
   lon: number;
   /** Latitude (קו רוחב), e.g. 32.08 for Tel Aviv */
   lat: number;
+  arena?:string
+  descriptio?:string
+  status?: string
+
+  
+
 }
 
 export interface AlertsMapProps {

@@ -67,6 +67,8 @@ const Home = () => {
       <Link to={'/form'}>הוספת התראה</Link>
       <br/>
       <Link to={'/oneWarning'}>חפש התראה בודדת</Link>
+      <br />
+      <Link to={'/search'}>סינון לפי פרמטרים אחרים</Link>
       <br/>
       <input type="text" placeholder="חפש התראה לפי שם" onChange={(e)=>setsearch(e.target.value)} />
       <br/>

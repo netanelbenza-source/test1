@@ -46,10 +46,8 @@ app.get('/api/alerts/:id',async(req,res)=>{
 
 app.post('/api/alerts',checkInsert(),async(req,res)=>{
     try{
-        console.log(req.body)
         const body = req.body
         const result = await postWarning(body)
-        console.log(result)
         res.json({success:true,data:result})
 
     
