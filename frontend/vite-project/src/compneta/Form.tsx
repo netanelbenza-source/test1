@@ -19,8 +19,8 @@ const Form = () => {
             priority:priority,
             arena:arena,
             status:status,
-            lon:lon,
-            lat:lat
+            lon:Number(lon),
+            lat:Number(lat)
 
         }
         const response = await fetch('http://localhost:3000/api/alerts',{
@@ -28,6 +28,9 @@ const Form = () => {
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify(warning)
         })
+        console.log(response)
+        const s = await response.json()
+        console.log(s)
         if(response.ok){
            setmessage('ההתראה הוספה בהצלחה')
            return

@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import AlertsMap from "./AlertsMap";
 import {
-  type AlertPriority,
   type MapAlert,
-  type AlertsMapProps,
 } from "./AlertsMap";
 import { Link } from "react-router";
 
@@ -13,13 +11,22 @@ const Home = () => {
   const [err, seterr] = useState("");
   const [search,setsearch] = useState('')
 
+
+  async function deletewarning(id:string){
+        const response = await fetch(`http://localhost:3000/api/alerts/${id}`,{
+            method:'DELETE'
+        })
+        if (! response.ok){
+            seterr('המחיקה לא הושלמה')
+        }
+
+  }
   
   let filterData = data 
   if(Array.isArray(data)){
   filterData = data.filter((w)=> w.displayName.includes(search)) 
 
   }
-
 
 
 
@@ -58,8 +65,12 @@ const Home = () => {
   return (
     <div>
       <Link to={'/form'}>הוספת התראה</Link>
-      <hr />
+      <br/>
+      <Link to={'/oneWarning'}>חפש התראה בודדת</Link>
+      <br/>
       <input type="text" placeholder="חפש התראה לפי שם" onChange={(e)=>setsearch(e.target.value)} />
+      <br/>
+      <br />
       <AlertsMap alerts={filterData as MapAlert[]} />
       {Array.isArray(filterData) && filterData.map((w)=>(
         <div key={w._id}>
@@ -69,7 +80,7 @@ const Home = () => {
                 <li>{w.lat}</li>
                 <li>{w.lon}</li>
             </ul>
-            <button onClick={}>delete</button>
+            <button onClick={(e)=>deletewarning(String(w._id))}>delete</button>
         </div>
       ))}
     </div>
