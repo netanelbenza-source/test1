@@ -43,19 +43,27 @@ const Form = () => {
     <div>
         {! message && !err &&
         <div>
+         <h2>טופס יצירת התראה</h2>
         <input type="text" placeholder='displayName' onChange={(e)=>{setname(e.target.value)}} required/>
         <input type="text" placeholder='description' onChange={(e)=>{setdescription(e.target.value)}} required/>
-        <select value={priority} onChange={(e)=>{setpriority(e.target.value)}}required >
-            <option value="Medium"></option>
-            <option value="High"></option>
-            <option value=" Critical"></option>
+
+
+        <select value={priority} onChange={(e)=>{setpriority(e.target.value)}}required>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High"</option>
+          <option value="Critical">Critical</option>
         </select>
+
+
         <select value={arena} onChange={(e)=>{setarena(e.target.value)}}required >
-            <option value="South"></option>
-            <option value="Center"></option>
+            <option value="North">North</option>
+            <option value="South">South</option>
+            <option value="Center">Center</option>
         </select>
         <select value={status} onChange={(e)=>{setstatus(e.target.value)}}required >
-            <option value="Active"></option>
+            <option value="Handled">Handled</option>
+            <option value="Active">Active</option>
         </select>
         <input type="number" placeholder='lon' onChange={(e)=>{setlon(e.target.value)}}required/>
         <input type="number" placeholder='lat' onChange={(e)=>{setlat(e.target.value)}} required />

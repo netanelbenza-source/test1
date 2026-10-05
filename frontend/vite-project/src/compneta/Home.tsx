@@ -5,6 +5,7 @@ import {
   type MapAlert,
   type AlertsMapProps,
 } from "./AlertsMap";
+import { Link } from "react-router";
 
 const Home = () => {
   const [data, setdata] = useState<MapAlert[] | string>("");
@@ -45,6 +46,8 @@ const Home = () => {
 
   return (
     <div>
+      <Link to={'/form'}>הוספת התראה</Link>
+      <hr />
       <AlertsMap alerts={data as MapAlert[]} />
     </div>
   );
