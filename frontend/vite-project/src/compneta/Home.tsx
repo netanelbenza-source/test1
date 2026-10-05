@@ -77,10 +77,10 @@ const Home = () => {
       {Array.isArray(filterData) && filterData.map((w)=>(
         <div key={w._id}>
             <ul>
-                <li>{w.displayName}</li>
-                <li>{w.priority}</li>
-                <li>{w.lat}</li>
-                <li>{w.lon}</li>
+                <li>displayName : {w.displayName}</li>
+                <li>priority : {w.priority}</li>
+                <li>lat : {w.lat}</li>
+                <li>lon : {w.lon}</li>
             </ul>
             <button onClick={(e)=>deletewarning(String(w._id))}>delete</button>
         </div>

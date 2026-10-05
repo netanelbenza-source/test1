@@ -61,12 +61,12 @@ const Onewarning = () => {
         {Array.isArray(alldata) && alldata && alldata.map((w)=>(
             <div key={w._id}>
                 <ol>
-                   <li>{w.displayName}</li>
-                   <li>{w.description}</li>
-                   <li>{w.priority}</li>
-                   <li>{w.status}</li>
-                   <li>{w.lat}</li>
-                   <li>{w.lon}</li>
+                   <li>displayName : {w.displayName}</li>
+                   <li> description : {w.description}</li>
+                   <li> priority : {w.priority}</li>
+                   <li> status : {w.status}</li>
+                   <li>lat : {w.lat}</li>
+                   <li>lon : {w.lon}</li>
                 </ol>
             </div>
         ))}
