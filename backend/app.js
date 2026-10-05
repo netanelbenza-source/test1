@@ -17,6 +17,14 @@ app.use(cors())
 
 
 
+function hendleError(err,req,res,next){
+     const status = err.status || 500
+     res.json({message:err.message || 'internal server'})
+
+}
+
+app.use(hendleError)
+
 
 
 
