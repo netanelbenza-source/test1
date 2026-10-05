@@ -47,7 +47,7 @@ const Form = () => {
         <input type="text" placeholder='displayName' onChange={(e)=>{setname(e.target.value)}} required/>
         <input type="text" placeholder='description' onChange={(e)=>{setdescription(e.target.value)}} required/>
 
-
+   
         <select value={priority} onChange={(e)=>{setpriority(e.target.value)}}required>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>

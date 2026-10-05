@@ -8,9 +8,20 @@ import {
 import { Link } from "react-router";
 
 const Home = () => {
-  const [data, setdata] = useState<MapAlert[] | string>("");
+  const [data, setdata] = useState<MapAlert[] | string >("");
   const [loding, setloding] = useState(true);
   const [err, seterr] = useState("");
+  const [search,setsearch] = useState('')
+
+  
+  let filterData = data 
+  if(Array.isArray(data)){
+  filterData = data.filter((w)=> w.displayName.includes(search)) 
+
+  }
+
+
+
 
   useEffect(() => {
     async function getAllWarninig() {
@@ -48,7 +59,19 @@ const Home = () => {
     <div>
       <Link to={'/form'}>הוספת התראה</Link>
       <hr />
-      <AlertsMap alerts={data as MapAlert[]} />
+      <input type="text" placeholder="חפש התראה לפי שם" onChange={(e)=>setsearch(e.target.value)} />
+      <AlertsMap alerts={filterData as MapAlert[]} />
+      {Array.isArray(filterData) && filterData.map((w)=>(
+        <div key={w._id}>
+            <ul>
+                <li>{w.displayName}</li>
+                <li>{w.priority}</li>
+                <li>{w.lat}</li>
+                <li>{w.lon}</li>
+            </ul>
+            <button onClick={}>delete</button>
+        </div>
+      ))}
     </div>
   );
 };
