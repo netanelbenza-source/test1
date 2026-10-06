@@ -5,16 +5,7 @@ import { Link, useNavigate } from "react-router";
 import { jwtDecode } from "jwt-decode";
 
 
-interface warning{
-  displayName:string,
-  description:string,
-  priority:string,
-  arena:string,
-  status:string,
-  lon:number,
-  lat:number
 
-}
 
 
 const Home = () => {
@@ -53,10 +44,13 @@ const Home = () => {
   }
 
   async function updatewarning(id: string) {
-    const up = { [FieldofChange]: change };
     const token = localStorage.getItem('token')
     const payload = jwtDecode(token ? token : '');
-    
+    const up = { [FieldofChange]: change };
+    if(payload.role === 'general_user' && FieldofChange != 'status'){
+      seterr('אינך רשאי לעדכן שדה זו')
+      return
+    }
     const response = await fetch(`http://localhost:3000/api/alerts/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },

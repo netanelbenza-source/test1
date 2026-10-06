@@ -130,7 +130,6 @@ try {
 app.post("/api/auth/register", checkregister(), async (req, res) => {
   try {
     const body = req.body;
-    console.log(body)
     const id = await insertUser(body);
     res.json({ success: true, data: id });
   } catch (err) {
