@@ -2,7 +2,7 @@ import env from "dotenv/config";
 import express from "express";
 import cors from 'cors'
 import { checkInsert,checkregister } from "./middlewere.js";
-import { AllWarning,oneWarning,postWarning,deletewarning,updateWarning,insertUser } from "./controler.js";
+import { AllWarning,oneWarning,postWarning,deletewarning,updateWarning,insertUser,deleteuser } from "./controler.js";
 
 
 const PORT = process.env.PORT || 3000;

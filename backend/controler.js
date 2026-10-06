@@ -2,6 +2,7 @@ import env from 'dotenv/config'
 import { baseCrud } from "./repo/crudMongodb.js";
 import { checkstatus,checkpriority,checkarena } from "./servise.js";
 import { collaction, collaction1 } from './repo/crudMongodb.js';
+import { hashPassword } from './servise.js';
 
 
 export async function AllWarning(){
@@ -45,7 +46,19 @@ export async function updateWarning(id,body){
 
 
 
+
+
 export async function insertUser(body){
-     const id = await baseCrud(collaction1).insert(body)
+     const {password, username,email,lat,role,assignedArena} = body
+     const hash = await hashPassword(password)
+     const user = {username,email,lat,role,assignedArena,hash}
+     const id = await baseCrud(collaction1).insert(user)
      return id
+}
+
+
+export async function deleteuser(id){
+    const result = await baseCrud(collaction1)._delete(id)
+    return true
+
 }
