@@ -2,7 +2,7 @@ import env from "dotenv/config";
 import express from "express";
 import cors from 'cors'
 import { checkInsert,checkregister } from "./middlewere.js";
-import { AllWarning,oneWarning,postWarning,deletewarning,updateWarning } from "./controler.js";
+import { AllWarning,oneWarning,postWarning,deletewarning,updateWarning,insertUser } from "./controler.js";
 
 
 const PORT = process.env.PORT || 3000;
@@ -64,7 +64,7 @@ app.post('/api/alerts',checkInsert(),async(req,res)=>{
 app.delete('/api/alerts/:id',async(req,res)=>{
     try{
     const id = req.params.id
-    const deleate = deletewarning(id)
+    const deleate = await deletewarning(id)
     res.json({success:true})
 
 
@@ -109,15 +109,30 @@ app.get('/api/auth',(req,res)=>{
 
 
 app.post('/api/auth/register',checkregister(),async(req,res)=>{
+    try{
     const body = req.body
-    const id = await insertUser
-    res.json({success:true,data:id})
+    const id = await insertUser(body)
+    res.json({success:true,data:id})}
+    catch(err){
+        throw err
+    }
 
 })
 
 
 
-app.delete('/api/auth/users/:id',(req,res)=>{
+app.delete('/api/auth/users/:id',async(req,res)=>{
+     try{
+    const id = req.params.id
+    const deleate = await deleteuser(id)
+    res.json({success:true})
+
+
+
+    }catch(err){
+        throw err
+
+     }
 
 })
 
