@@ -30,7 +30,18 @@ const Home = () => {
   const [name, setname] = useState("");
   const [role, setrole] = useState("");
   const [id, setid] = useState("");
+  const [exit,setexit] = useState('')
   const navigate = useNavigate();
+  
+
+  function exitFromWeb(){
+    localStorage.removeItem('token')
+    setexit('ok')
+  }
+
+  if(exit){
+    navigate('/login')
+  }
 
   async function deletewarning(id: string) {
     const response = await fetch(`http://localhost:3000/api/alerts/${id}`, {
@@ -43,6 +54,9 @@ const Home = () => {
 
   async function updatewarning(id: string) {
     const up = { [FieldofChange]: change };
+    const token = localStorage.getItem('token')
+    const payload = jwtDecode(token ? token : '');
+    
     const response = await fetch(`http://localhost:3000/api/alerts/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -143,6 +157,8 @@ const Home = () => {
       <Link to={'/users'}>רשימת כל המשתמשים</Link>
        </>
       }
+      <br />
+      <button onClick={exitFromWeb}>EXIT</button>
       <br />
       <input
         type="text"
