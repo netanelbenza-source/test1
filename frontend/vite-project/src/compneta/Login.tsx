@@ -34,9 +34,16 @@ const Login = () => {
   return (
     <div>
         <h3>התחברות למערכת</h3>
+        {! err && (
+         <div>  
         <input type="text" placeholder='email' onChange={(e)=> setemail(e.target.value)} required/>
         <input type="text" placeholder='password' onChange={(e)=> setpassword(e.target.value)} required />
         <button onClick={login}>כנס</button>
+        </div> 
+         ) }
+         {err && (
+            <div>{err}</div>
+         )}
     </div>
   )
 }
