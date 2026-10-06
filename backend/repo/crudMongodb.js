@@ -1,11 +1,12 @@
 import { db } from "../ConnectDB/mongoDb.js";
 import { ObjectId } from "mongodb";
 
-const collaction = db.collection('Warning')
+export const collaction = db.collection('Warning')
+export const collaction1 = db.collection('users')
 
 
 
-export function baseCrud(){
+export function baseCrud(collaction){
 
     async function insertWarning(warning){
        const id = (await collaction.insertOne(warning)).insertedId
@@ -13,7 +14,6 @@ export function baseCrud(){
     }
 
     async function getOneWarning(id) {
-        console.log(id)
         const result = await collaction.findOne({_id:new ObjectId(id)})
         return result
         

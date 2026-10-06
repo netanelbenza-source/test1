@@ -108,7 +108,9 @@ app.get('/api/auth',(req,res)=>{
 })
 
 
-app.post('/api/auth/register',checkregister(),(req,res)=>{
+app.post('/api/auth/register',checkregister(),async(req,res)=>{
+    const body = req.body
+    const id = await insertUser
 
 })
 

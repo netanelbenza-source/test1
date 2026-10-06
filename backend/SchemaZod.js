@@ -16,4 +16,7 @@ export const register = z.object({
     password:z.string(),
     email:z.email(),
     lat:z.number(),
+    role:z.enum(['arena_user','general','user','admin']),
+    assignedArena:z.enum(['North','South','Center','All'])
+
 })
