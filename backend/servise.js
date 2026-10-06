@@ -24,6 +24,7 @@ export function checkarena(arena){
 }
 
 
+
 export function checkstatus(status){
     const list = ['Active','Handled']
     if(!list.includes(status)){
@@ -34,6 +35,43 @@ export function checkstatus(status){
       return
     
 }
+
+
+
+
+
+
+
+export function checkrole(role){
+      const list = ['arena_user' , 'general_user' , 'admin']
+      if(! list.includes(role)){
+        const err = new Error('bed role')
+        err.status = 400
+        throw err
+      }
+      return
+}
+
+
+export function checkassignedArena(assignedArena){
+    const list = ['North' , 'South' ,'Center' , 'All']
+    if(! list.includes(assignedArena)){
+        const err = new Error('bed assignedArena')
+        err.status = 400
+        throw err
+      }
+    return  
+    
+}
+
+
+
+
+
+
+
+
+
 
 
 

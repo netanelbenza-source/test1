@@ -1,6 +1,6 @@
 import env from 'dotenv/config'
 import { baseCrud } from "./repo/crudMongodb.js";
-import { checkstatus,checkpriority,checkarena } from "./servise.js";
+import { checkstatus,checkpriority,checkarena,checkrole,checkassignedArena } from "./servise.js";
 import { collaction, collaction1 } from './repo/crudMongodb.js';
 import { hashPassword } from './servise.js';
 
@@ -49,9 +49,11 @@ export async function updateWarning(id,body){
 
 
 export async function insertUser(body){
-     const {password, username,email,lat,role,assignedArena} = body
+     const {password, username,email,role,assignedArena} = body
+     checkrole(role)
+     checkassignedArena(assignedArena)
      const hash = await hashPassword(password)
-     const user = {username,email,lat,role,assignedArena,hash}
+     const user = {username,email,role,assignedArena,hash}
      const id = await baseCrud(collaction1).insert(user)
      return id
 }
