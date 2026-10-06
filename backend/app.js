@@ -1,7 +1,7 @@
 import env from "dotenv/config";
 import express from "express";
 import cors from "cors";
-import { checkInsert, checkregister, checklogin } from "./middlewere.js";
+import { checkInsert, checkregister, checklogin,checkRole,checkToken} from "./middlewere.js";
 import {
   AllWarning,
   oneWarning,
@@ -11,6 +11,8 @@ import {
   insertUser,
   deleteuser,
   creteToken,
+  getUser,
+  Allusers
 } from "./controler.js";
 
 const PORT = process.env.PORT || 3000;
@@ -98,11 +100,34 @@ app.post("/api/auth/login", checklogin(), async (req, res) => {
   }
 });
 
-app.get("/api/auth/me", (req, res) => {});
+app.get("/api/auth/me",checkToken,async(req, res) => {
+    try {
+    const id = req.userid;
+    const user = await getUser(id);
+    res.json({ success: true ,user:user});
+  } catch (err) {
+    throw err;
+  }
+});
 
-app.get("/api/auth", (req, res) => {});
 
-app.post("/api/auth/register", checkregister(), async (req, res) => {
+      
+
+
+app.get("/api/auth",checkToken,checkRole('admin'), async(req, res) => {
+try {
+    const getAllUsers = await Allusers();
+    res.json({ success: true, data: getAllUsers});
+  } catch (err) {
+    throw err;
+  }
+});
+
+
+
+
+
+app.post("/api/auth/register",checkToken,checkRole('admin'), checkregister(), async (req, res) => {
   try {
     const body = req.body;
     const id = await insertUser(body);
@@ -112,7 +137,7 @@ app.post("/api/auth/register", checkregister(), async (req, res) => {
   }
 });
 
-app.delete("/api/auth/users/:id", async (req, res) => {
+app.delete("/api/auth/users/:id",checkToken,checkRole('admin'), async (req, res) => {
   try {
     const id = req.params.id;
     const deleate = await deleteuser(id);

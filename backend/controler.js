@@ -78,3 +78,19 @@ export async function creteToken(body){
     const token = jwt.sign(payload,process.env.SEACRET,{expiresIn:'1hr'})
     return token
 }
+
+
+
+export async function  getUser(id){
+   const result = await baseCrud(collaction1).getOnebyid(id)
+   return result
+}
+
+
+
+export async function  Allusers(){
+   const result = await baseCrud(collaction1).getAll()
+   return result
+}
+
+

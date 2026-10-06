@@ -69,7 +69,7 @@ export function checkToken(req,res,next){
     req.userid = reuslt.id
     next()
     return
-    }catch(err){
+    }catch(eror){
        const err = new Error('The token is invalid.')
         err.status = 401
         throw err
@@ -81,7 +81,7 @@ export function checkToken(req,res,next){
 
 export function checkRole(...role){
     return (req,res,next)=>{
-        const roleUser = req.role
+        const roleUser = req.headers.role
         if(! role.includes(roleUser)){
             const err = new Error('You do not have permission to perform this action.')
             err.status = 403
