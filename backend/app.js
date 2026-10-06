@@ -1,7 +1,7 @@
 import env from "dotenv/config";
 import express from "express";
 import cors from 'cors'
-import { checkInsert } from "./middlewere.js";
+import { checkInsert,checkregister } from "./middlewere.js";
 import { AllWarning,oneWarning,postWarning,deletewarning,updateWarning } from "./controler.js";
 
 
@@ -92,6 +92,32 @@ app.put('/api/alerts/:id',async(req,res)=>{
      }
 
 })
+
+
+app.post('/api/auth/login',(req,res)=>{
+
+})
+
+
+app.get('/api/auth/me',(req,res)=>{
+
+})
+
+app.get('/api/auth',(req,res)=>{
+
+})
+
+
+app.post('/api/auth/register',checkregister(),(req,res)=>{
+
+})
+
+
+
+app.delete('/api/auth/users/:id',(req,res)=>{
+
+})
+
 
 
 
