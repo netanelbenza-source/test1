@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
 import './App.css'
 import Layout from './compneta/Layout'
-import Home from './compneta/home'
 import Form from './compneta/Form'
 import Onewarning from './compneta/Onewarning'
 import Search from './compneta/Search'
+import Home from './compneta/Home'
+import Login from './compneta/Login'
 
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
     <>
     <BrowserRouter>
     <Routes>
-    <Route path='/form' element={<Form/>}></Route>  
+    <Route path='/form' element={<Form/>}></Route> 
+    <Route path='login' element={<Login/>}/> 
     <Route path='/search' element={<Search/>}></Route> 
     <Route path='/oneWarning' element={<Onewarning/>}></Route> 
     <Route path='/' element={<Layout/>}>
