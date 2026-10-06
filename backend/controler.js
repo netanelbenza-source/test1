@@ -74,7 +74,7 @@ export async function creteToken(body){
     const user = await baseCrud(collaction1).getOne({email:email})
     const userPassword = user.password
     await comperePassword(password,userPassword)
-    const payload = {name:user.username,role:user.role,id:user._id}
+    const payload = {name:user.username,role:user.role,id:user._id,assignedArena:user.assignedArena}
     const token = jwt.sign(payload,process.env.SEACRET,{expiresIn:'1hr'})
     return token
 }
