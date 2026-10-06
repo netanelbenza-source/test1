@@ -31,9 +31,7 @@ const Form = () => {
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify(warning)
         })
-        console.log(response)
-        const s = await response.json()
-        console.log(s)
+        
         if(response.ok){
            setmessage('ההתראה הוספה בהצלחה')
            return
