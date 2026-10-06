@@ -72,7 +72,15 @@ export function checkassignedArena(assignedArena){
 
 
 
-
+export async function comperePassword(password,hash){
+    const result = await bcrypt.compare(password,hash)
+    if(! result){
+       const err = new Error('One of the surging listenership figures')
+        err.status = 404
+        throw err
+     }
+     return
+}
 
 
 

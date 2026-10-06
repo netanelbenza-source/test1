@@ -1,8 +1,10 @@
 import env from 'dotenv/config'
 import { baseCrud } from "./repo/crudMongodb.js";
-import { checkstatus,checkpriority,checkarena,checkrole,checkassignedArena } from "./servise.js";
+import { checkstatus,checkpriority,checkarena,checkrole,checkassignedArena,comperePassword } from "./servise.js";
 import { collaction, collaction1 } from './repo/crudMongodb.js';
 import { hashPassword } from './servise.js';
+import jwt from 'jsonwebtoken'
+
 
 
 export async function AllWarning(){
@@ -13,7 +15,7 @@ export async function AllWarning(){
 
 
 export async function oneWarning(id){
-   const result = await baseCrud(collaction).getOne(id)
+   const result = await baseCrud(collaction).getOnebyid(id)
    return result
 }
 
@@ -53,7 +55,7 @@ export async function insertUser(body){
      checkrole(role)
      checkassignedArena(assignedArena)
      const hash = await hashPassword(password)
-     const user = {username,email,role,assignedArena,hash}
+     const user = {username,email,role,assignedArena,password:hash}
      const id = await baseCrud(collaction1).insert(user)
      return id
 }
@@ -63,4 +65,16 @@ export async function deleteuser(id){
     const result = await baseCrud(collaction1)._delete(id)
     return true
 
+}
+
+
+
+export async function creteToken(body){
+    const {password,email} = body
+    const user = await baseCrud(collaction1).getOne({email:email})
+    const userPassword = user.password
+    await comperePassword(password,userPassword)
+    const payload = {name:user.username,role:user.role,id:user._id}
+    const token = jwt.sign(payload,process.env.SEACRET,{expiresIn:'1hr'})
+    return token
 }

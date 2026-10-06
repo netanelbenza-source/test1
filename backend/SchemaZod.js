@@ -15,7 +15,11 @@ export const register = z.object({
     username:z.string(),
     password:z.string(),
     email:z.email(),
-    // role:z.enum(['arena_user'|'general'|'user'|'admin']),
-    // assignedArena:z.enum(['North'|'South'|'Center'|'All'])
+})
 
+
+
+export const login =  z.object({
+    password:z.string(),
+    email:z.email(),
 })

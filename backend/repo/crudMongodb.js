@@ -13,8 +13,14 @@ export function baseCrud(collaction){
        return id
     }
 
-    async function getOne(id) {
+    async function getOnebyid(id) {
         const result = await collaction.findOne({_id:new ObjectId(id)})
+        return result
+        
+    }
+
+    async function getOne(any) {
+        const result = await collaction.findOne(any)
         return result
         
     }
@@ -38,6 +44,6 @@ export function baseCrud(collaction){
 
     }
 
-    return {insert,getOne,getAll,Update,_delete}
+    return {insert,getOnebyid,getAll,Update,_delete,getOne}
 
 }
