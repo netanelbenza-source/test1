@@ -5,12 +5,15 @@ import { jwtDecode } from "jwt-decode";
 
 const Adduser = () => {
     const [name,setname] = useState('')
+    const [username,setusername] = useState('')
     const [password,setpassword] = useState('')
     const [email,setemail] = useState('')
     const [role,setrole] = useState('')
+    const [userrole,setuserrole] = useState('')
     const [assignedArena,setassignedArena] = useState('')
     const [message,setmessage] = useState('')
     const [err,seterr] = useState('')
+    const [id,setid] = useState('')
     const navigate = useNavigate()
 
 
@@ -26,6 +29,9 @@ const Adduser = () => {
         }
         const token = localStorage.getItem('token')
         const payload = jwtDecode(token ? token : '');
+        setusername(payload.name)
+        setid(payload.id)
+        setuserrole(payload.role)
         const response = await fetch('http://localhost:3000/api/auth/register',{
             method:'POST',
             headers:{'Content-Type':'application/json',
@@ -57,6 +63,17 @@ const Adduser = () => {
 
   return (
     <div>
+        <nav>
+        {username && (
+          <div>
+            <h5>user</h5>
+            <h5>name:{username}</h5>
+            <h5>role:{userrole}</h5>
+            <h5>id:{id}</h5>
+          </div>
+        )}
+      </nav>
+      <hr />
         {! message && !err &&
         <div>
          <h2>טופס הוספת משתמש</h2>
