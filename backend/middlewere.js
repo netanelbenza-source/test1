@@ -1,6 +1,7 @@
+import env from 'dotenv/config'
 import {z} from 'zod'
 import { warning,register,login } from './SchemaZod.js'
-
+import jwt from 'jsonwebtoken'
 
 export function checkInsert(){
     return (req,res,next)=>{
@@ -50,6 +51,28 @@ export function checklogin(){
             err.status = 400
             throw err
         }
+    }
+
+}
+
+
+export function checkToken(req,res,next){
+    try{
+    const headers = req.headers.authorization
+    if(! headers){
+        const err = new Error('You dont have a token.')
+        err.status = 401
+        throw err
+    }
+    const token = headers.split(' ')[1]
+    const reuslt = jwt.verify(token,process.env.SEACRET)
+    req.userid = reuslt.id
+    next()
+    return
+    }catch(err){
+       const err = new Error('The token is invalid.')
+        err.status = 401
+        throw err
     }
 
 }
