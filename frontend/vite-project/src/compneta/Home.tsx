@@ -55,7 +55,7 @@ const Home = () => {
       return;
     }
 
-    const payload = jwtDecode(token);
+    const payload = jwtDecode(token ? token : '');
     if (payload.role === "admin") {
       setadmin("admin");
     }
@@ -113,7 +113,12 @@ const Home = () => {
       <br />
       <Link to={"/search"}>סינון לפי פרמטרים אחרים</Link>
       <br />
-      {admin && <Link to={"/add"}>להוספת משתמש</Link>}
+      {admin && <>
+      <Link to={"/add"}>להוספת משתמש</Link>
+      <br />
+      <Link to={'/users'}>רשימת כל המשתמשים</Link>
+       </>
+      }
       <br />
       <input
         type="text"

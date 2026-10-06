@@ -8,6 +8,7 @@ import Login from './compneta/Login'
 import Adduser from './compneta/Adduser'
 import Connect from './Connect'
 import Layout from './compneta/Layout'
+import Allusers from './compneta/Allusers'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <>
     <BrowserRouter>
     <Routes>
+    <Route path='/users' element={<Allusers/>}></Route>
     <Route path='/form' element={<Form/>}></Route> 
     <Route path='add' element={<Adduser/>}/>
     <Route path='login' element={<Login/>}/> 

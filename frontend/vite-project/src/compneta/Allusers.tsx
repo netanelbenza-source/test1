@@ -14,7 +14,11 @@ const Allusers = () => {
 
 
 
-    async function deleteuser() {
+    async function deleteuser(role:string) {
+    if(role === 'admin'){
+       seterr("לא שייך לבצע מחיקת בעלים מהמערכת");
+       return
+    }    
     const token = localStorage.getItem('token') 
     const payload = jwtDecode(token ? token : '');   
     const response = await fetch(`http://localhost:3000/api/auth/users/${payload.id}`, {
@@ -24,8 +28,10 @@ const Allusers = () => {
       role:payload.role
         }
     });
+    
     if (!response.ok) {
       seterr("המחיקה לא הושלמה");
+      return
     }
     }
 
@@ -102,7 +108,7 @@ const Allusers = () => {
                     <li>role{user.role}</li>
                     <li>assignedArena{user.assignedArena}</li>
                 </ol>
-                <button onClick={(e) => deleteuser(String(user._id))}>
+                <button onClick={(e)=>deleteuser(user.role)}>
                 delete
                </button>
              </div>
