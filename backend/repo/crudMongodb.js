@@ -8,28 +8,28 @@ export const collaction1 = db.collection('users')
 
 export function baseCrud(collaction){
 
-    async function insertWarning(warning){
+    async function insert(warning){
        const id = (await collaction.insertOne(warning)).insertedId
        return id
     }
 
-    async function getOneWarning(id) {
+    async function getOne(id) {
         const result = await collaction.findOne({_id:new ObjectId(id)})
         return result
         
     }
 
-    async function getAllWarning(){
+    async function getAll(){
         const result = await collaction.find().toArray()
         return result
     }
 
-    async function UpdateWarning(id,up){
+    async function Update(id,up){
         const  result = await collaction.findOneAndUpdate({_id:new ObjectId(id)},{$set:up},{returnDocument:'after'})
         return result
     }
 
-    async function deleteWarning(id){
+    async function _delete(id){
         const result = await collaction.deleteOne({_id: new ObjectId(id)})
         if(result.deletedCount === 1){
             return true
@@ -38,6 +38,6 @@ export function baseCrud(collaction){
 
     }
 
-    return {insertWarning,getOneWarning,getAllWarning,UpdateWarning,deleteWarning}
+    return {insert,getOne,getAll,Update,_delete}
 
 }

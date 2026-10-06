@@ -5,15 +5,14 @@ import { collaction, collaction1 } from './repo/crudMongodb.js';
 
 
 export async function AllWarning(){
-    const result = await baseCrud(collaction).getAllWarning()
+    const result = await baseCrud(collaction).getAll()
     return result
     }
 
 
 
 export async function oneWarning(id){
-   const result = await baseCrud(collaction).getOneWarning(id)
-   console.log(result)
+   const result = await baseCrud(collaction).getOne(id)
    return result
 }
 
@@ -24,14 +23,14 @@ export async function postWarning(body){
    checkstatus(status)
    checkpriority(priority)
    checkarena(arena)
-   const result = await baseCrud(collaction).insertWarning(body)
+   const result = await baseCrud(collaction).insert(body)
    return result
 }
 
 
 
 export async function deletewarning(id){
-    const result = await baseCrud(collaction).deleteWarning(id)
+    const result = await baseCrud(collaction)._delete(id)
     return true
 
 }
@@ -39,7 +38,7 @@ export async function deletewarning(id){
 
 
 export async function updateWarning(id,body){
-    const result = await baseCrud(collaction).UpdateWarning(id,body)
+    const result = await baseCrud(collaction).Update(id,body)
     return result
 
 }
@@ -47,5 +46,6 @@ export async function updateWarning(id,body){
 
 
 export async function insertUser(body){
-     const {}
+     const id = await baseCrud(collaction1).insert(body)
+     return id
 }
