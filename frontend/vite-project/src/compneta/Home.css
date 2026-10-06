@@ -1,0 +1,40 @@
+.allnav {
+  background-color: antiquewhite;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+
+  margin: 20px;
+}
+
+h5 {
+  margin: 10px;
+  margin-left: 70px;
+}
+
+.L {
+  text-decoration: none;
+  margin: 20px;
+}
+
+.link {
+  display: flex;
+  flex-direction: row;
+}
+
+.exit {
+  background-color: rgb(62, 60, 56);
+  color: white;
+}
+
+.click{
+    margin: 10px;
+    background-color: black;
+    color: white;
+}
+
+.list{
+    background-color: bisque;
+}

@@ -3,6 +3,7 @@ import AlertsMap from "./AlertsMap";
 import { type MapAlert } from "./AlertsMap";
 import { Link, useNavigate } from "react-router";
 import { jwtDecode } from "jwt-decode";
+import './Home.css'
 
 
 
@@ -130,29 +131,33 @@ const Home = () => {
     <div>
       <nav>
         {name && (
-          <div>
-            <h5>user</h5>
+          <div className="allnav">
+            <h3 >user</h3>
+            <div className="nav">
             <h5>name:{name}</h5>
             <h5>role:{role}</h5>
             <h5>id:{id}</h5>
+            </div>
           </div>
         )}
       </nav>
       <hr />
-      <Link to={"/form"}>הוספת התראה</Link>
+      <div className="link">
+      <Link className="L" to={"/form"}>הוספת התראה</Link>
       <br />
-      <Link to={"/oneWarning"}>חפש התראה בודדת</Link>
+      <Link className="L" to={"/oneWarning"}>חפש התראה בודדת</Link>
       <br />
-      <Link to={"/search"}>סינון לפי פרמטרים אחרים</Link>
+      <Link className="L" to={"/search"}>סינון לפי פרמטרים אחרים</Link>
       <br />
       {admin && <>
-      <Link to={"/add"}>להוספת משתמש</Link>
+      <Link className="L" to={"/add"}>להוספת משתמש</Link>
       <br />
-      <Link to={'/users'}>רשימת כל המשתמשים</Link>
+      <Link className="L" to={'/users'}>רשימת כל המשתמשים</Link>
        </>
       }
       <br />
-      <button onClick={exitFromWeb}>EXIT</button>
+      <button className="exit" onClick={exitFromWeb}>EXIT</button>
+      </div>
       <br />
       <input
         type="text"
@@ -164,14 +169,14 @@ const Home = () => {
       <AlertsMap alerts={filterData as MapAlert[]} />
       {Array.isArray(filterData) &&
         filterData.map((w) => (
-          <div key={w._id}>
+          <div className="list" key={w._id}>
             <ul>
               <li>displayName : {w.displayName}</li>
               <li>priority : {w.priority}</li>
               <li>lat : {w.lat}</li>
               <li>lon : {w.lon}</li>
             </ul>
-            <button onClick={(e) => deletewarning(String(w._id))}>
+            <button className="click" onClick={(e) => deletewarning(String(w._id))}>
               delete
             </button>
             <button onClick={(e) => setupdate("ok")}>update</button>
