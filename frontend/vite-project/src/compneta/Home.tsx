@@ -106,6 +106,7 @@ async function updatewarning(id:string){
                 <li>lon : {w.lon}</li>
             </ul>
             <button onClick={(e)=>deletewarning(String(w._id))}>delete</button>
+            <br />
             <button onClick={(e)=> setupdate('ok')}>update</button>
             {update && (
                 <div>
