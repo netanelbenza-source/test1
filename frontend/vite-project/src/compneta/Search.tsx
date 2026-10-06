@@ -4,6 +4,8 @@ import {
   type MapAlert,
 } from "./AlertsMap";
 import { useNavigate } from "react-router";
+import { jwtDecode } from "jwt-decode";
+
 
 
 
@@ -41,8 +43,20 @@ const Search = () => {
           return;
         }
         if (response.ok) {
+          const payload = jwtDecode(token ? token : '')
           const result = await response.json();
           const AllWarninig = result.data
+          if(payload.role === 'arena_user'){
+            console.log(payload.assignedArena)
+            console.log(AllWarninig)
+            const result = []
+            for(let item of AllWarninig ){
+              if(item.arena === payload.assignedArena)
+                result.push(item)
+            }
+            setdata(result);
+            return;
+          }
           setdata(AllWarninig);
           return;
         }

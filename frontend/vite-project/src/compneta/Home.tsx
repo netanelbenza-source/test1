@@ -4,6 +4,19 @@ import { type MapAlert } from "./AlertsMap";
 import { Link, useNavigate } from "react-router";
 import { jwtDecode } from "jwt-decode";
 
+
+interface warning{
+  displayName:string,
+  description:string,
+  priority:string,
+  arena:string,
+  status:string,
+  lon:number,
+  lat:number
+
+}
+
+
 const Home = () => {
   const [data, setdata] = useState<MapAlert[] | string>("");
   const [loding, setloding] = useState(true);
@@ -74,8 +87,19 @@ const Home = () => {
         if (response.ok) {
           const result = await response.json();
           const AllWarninig = result.data;
-          setdata(AllWarninig);
-          return;
+          if(payload.role === 'arena_user'){
+            console.log(payload.assignedArena)
+            console.log(AllWarninig)
+            const result = []
+            for(let item of AllWarninig ){
+              if(item.arena === payload.assignedArena)
+                result.push(item)
+            }
+            setdata(result);
+            return;
+          }
+        setdata(AllWarninig);
+        return;
         }
       } catch (err: any) {
         seterr(err.message);

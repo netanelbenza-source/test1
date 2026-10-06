@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
+import { jwtDecode } from "jwt-decode";
+
 
 
 const Form = () => {
@@ -16,6 +18,9 @@ const Form = () => {
     
     
     async function send(){
+        const token = localStorage.getItem('token')
+        const payload = jwtDecode(token ? token : '');
+        
         const warning = {
             displayName:name,
             description:description,
@@ -24,6 +29,11 @@ const Form = () => {
             status:status,
             lon:Number(lon),
             lat:Number(lat)
+
+        }
+        if(payload.role === 'arena_user' && arena != payload.assignedArena){
+            seterr('אינך רשאי להוסיף התראה לא בעזורך')
+            return
 
         }
         const response = await fetch('http://localhost:3000/api/alerts',{
