@@ -4,6 +4,7 @@ import {
   type MapAlert,
 } from "./AlertsMap";
 import { Link, useNavigate } from "react-router";
+import { jwtDecode } from "jwt-decode";
  
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
   const [FieldofChange,setFieldofChange] = useState('')
   const [change,setchange] = useState('')
   const[filter,setfilter] = useState('')
+  const [role,setrole] = useState('')
   const navigate = useNavigate()
 
 
@@ -62,6 +64,11 @@ async function updatewarning(id:string){
         navigate('/login')
         return
       }
+     
+    const payload = jwtDecode(token)  
+    if(payload.role === 'admin'){
+      setrole('admin')
+    }
     async function getAllWarninig() {
       try {
         seterr("");
@@ -101,6 +108,10 @@ async function updatewarning(id:string){
       <br />
       <Link to={'/search'}>סינון לפי פרמטרים אחרים</Link>
       <br/>
+      {role && (
+        <Link to={'/add'}>להוספת משתמש</Link>
+      )}
+      <br />
       <input type="text" placeholder="חפש התראה לפי שם" onChange={(e)=>setsearch(e.target.value)} />
       <br/>
       <br />

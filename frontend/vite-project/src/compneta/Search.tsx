@@ -3,6 +3,7 @@ import AlertsMap from "./AlertsMap";
 import {
   type MapAlert,
 } from "./AlertsMap";
+import { useNavigate } from "react-router";
 
 
 
@@ -13,6 +14,7 @@ const Search = () => {
   const [loding, setloding] = useState(true);
   const [err, seterr] = useState("");
   const [search,setsearch] = useState('')
+  const navigate = useNavigate()
 
   let filterData = data 
   if(Array.isArray(data)){
@@ -26,6 +28,10 @@ const Search = () => {
 
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
+     if(!token){
+        navigate('/login')
+        return}
     async function getAllWarninig() {
       try {
         seterr("");

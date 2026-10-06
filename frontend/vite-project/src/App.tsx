@@ -6,6 +6,7 @@ import Onewarning from './compneta/Onewarning'
 import Search from './compneta/Search'
 import Home from './compneta/Home'
 import Login from './compneta/Login'
+import Adduser from './compneta/Adduser'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <BrowserRouter>
     <Routes>
     <Route path='/form' element={<Form/>}></Route> 
+    <Route path='add' element={<Adduser/>}/>
     <Route path='login' element={<Login/>}/> 
     <Route path='/search' element={<Search/>}></Route> 
     <Route path='/oneWarning' element={<Onewarning/>}></Route> 

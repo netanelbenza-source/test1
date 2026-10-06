@@ -3,6 +3,7 @@ import AlertsMap from "./AlertsMap";
 import {
   type MapAlert,
 } from "./AlertsMap";
+import { useNavigate } from "react-router";
 
 
 
@@ -25,11 +26,17 @@ const Onewarning = () => {
  const [alldata, setalldata] = useState<Alert[] | string >("")
  const [err, seterr] = useState("");
  const [id,setid] = useState('')
+ const navigate = useNavigate()
 
  
  useEffect(()=>{
-    async function Getwarning(Id:string){
-        console.log(Id)
+   const token = localStorage.getItem('token')
+     if(!token){
+        navigate('/login')
+        return}
+    
+  async function Getwarning(Id:string){
+        
         const response = await fetch(`http://localhost:3000/api/alerts/${Id}`)
         if (! response.ok){
             seterr('המחיקה לא הושלמה')

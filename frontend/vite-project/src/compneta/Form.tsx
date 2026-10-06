@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router"
 
 
 const Form = () => {
@@ -11,7 +12,9 @@ const Form = () => {
     const [lat,setlat] = useState('')
     const [err,seterr] = useState('')
     const [message,setmessage] = useState('')
-
+    const navigate = useNavigate()
+    
+    
     async function send(){
         const warning = {
             displayName:name,
@@ -41,6 +44,15 @@ const Form = () => {
 
 
     }
+
+
+    useEffect(()=>{
+     const token = localStorage.getItem('token')
+     if(!token){
+        navigate('/login')
+        return
+      }
+    },[])
     
   return (
     <div>
