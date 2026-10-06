@@ -33,8 +33,9 @@ const Login = () => {
     }
   return (
     <div>
-        <input type="text" placeholder='email' onChange={(e)=> setemail(e.target.value)}/>
-        <input type="text" placeholder='password' onChange={(e)=> setpassword(e.target.value)} />
+        <h3>התחברות למערכת</h3>
+        <input type="text" placeholder='email' onChange={(e)=> setemail(e.target.value)} required/>
+        <input type="text" placeholder='password' onChange={(e)=> setpassword(e.target.value)} required />
         <button onClick={login}>כנס</button>
     </div>
   )
