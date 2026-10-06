@@ -76,3 +76,19 @@ export function checkToken(req,res,next){
     }
 
 }
+
+
+
+export function checkRole(...role){
+    return (req,res,next)=>{
+        const roleUser = req.role
+        if(! role.includes(roleUser)){
+            const err = new Error('You do not have permission to perform this action.')
+            err.status = 403
+            throw err
+        }
+        next()
+        return
+
+    }
+}
